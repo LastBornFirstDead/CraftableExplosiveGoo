@@ -9,7 +9,7 @@ public class CraftableExplosiveGoo : Mod
 {
     public void Start()
     {
-        CreateRecipe(ItemManager.GetItemByName("ExplosiveGoo"));
+        CreateRecipe(ItemManager.GetItemByName("ExplosiveGoo"), 2);
         Debug.Log("Mod Craftable Explosive Goo has been loaded!");
         allowItems("Scrap", "Nail");
     }
@@ -35,9 +35,10 @@ public class CraftableExplosiveGoo : Mod
     }
 
     /// <param name="pResultItem">Item resulting from the crafting.</param>
-    public static void CreateRecipe(Item_Base pResultItem)
+    public static void CreateRecipe(Item_Base pResultItem, int pAmount)
     {
         Traverse.Create(pResultItem.settings_recipe).Field("craftingCategory").SetValue(CraftingCategory.Resources);
+        Traverse.Create(pResultItem.settings_recipe).Field("amountToCraft").SetValue(pAmount);
     }
 
     public void OnModUnload()
